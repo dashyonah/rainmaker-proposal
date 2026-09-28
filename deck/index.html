@@ -1,0 +1,918 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Elishah Partner Network</title>
+<meta name="description" content="How Elishah, our product partner and our industry partners operate together: model, economics, IP and governance.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=block" rel="stylesheet">
+<style>
+:root{
+  --ink:#0F1B26;
+  --ink-2:#1B2B3A;
+  --paper:#F5F2EB;
+  --paper-2:#EDE8DD;
+  --card:#FFFFFF;
+  --line:#D9D1C1;
+  --muted:#6A6F76;
+  --text:#18222C;
+  --amber:#C9812A;      /* commercial / rainmaker */
+  --amber-soft:#F3E3CC;
+  --teal:#2E6E68;       /* product / Dimuthu */
+  --teal-soft:#D5E6E3;
+  --navy:#2A4A7A;       /* engineering / Elishah */
+  --navy-soft:#D8E0EC;
+  --stone:#8C8171;      /* platform reserve */
+  --stone-soft:#E6E0D5;
+  --red:#A6473B;
+  --serif:"Fraunces", Georgia, "Times New Roman", serif;
+  --sans:"Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --mono:"IBM Plex Mono", ui-monospace, Menlo, monospace;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:#0A1219;color:var(--text);font-family:var(--sans);-webkit-font-smoothing:antialiased;overflow:hidden}
+
+/* ---------- stage ---------- */
+.stage{position:fixed;inset:0;display:flex;align-items:center;justify-content:center}
+.deck{width:1920px;height:1080px;position:relative;transform-origin:center center;flex:none}
+.slide{position:absolute;inset:0;width:1920px;height:1080px;background:var(--paper);overflow:hidden;
+  padding:96px 120px 110px;display:none;flex-direction:column}
+.slide.active{display:flex}
+.slide.dark{background:var(--ink);color:#EDEAE3}
+
+/* ---------- chrome ---------- */
+.eyebrow{font-family:var(--mono);font-size:22px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin-bottom:28px;display:flex;gap:18px;align-items:center}
+.eyebrow .n{color:var(--muted)}
+.dark .eyebrow .n{color:#7F8A94}
+h1{font-family:var(--serif);font-weight:500;font-size:132px;line-height:1.0;letter-spacing:-.02em}
+h2{font-family:var(--serif);font-weight:500;font-size:72px;line-height:1.08;letter-spacing:-.015em;max-width:1560px}
+h3{font-family:var(--sans);font-weight:600;font-size:32px;line-height:1.25}
+h4{font-family:var(--mono);font-weight:500;font-size:20px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+p,li{font-size:28px;line-height:1.45}
+.lede{font-size:34px;line-height:1.4;color:#3C4650;max-width:1400px;margin-top:28px}
+.dark .lede{color:#B9C0C6}
+.muted{color:var(--muted)}
+.foot{position:absolute;left:120px;right:120px;bottom:44px;display:flex;justify-content:space-between;
+  font-family:var(--mono);font-size:17px;letter-spacing:.1em;text-transform:uppercase;color:#9A9489}
+.dark .foot{color:#5F6B76}
+.body{flex:1;display:flex;flex-direction:column;justify-content:center;margin-top:36px}
+.grid{display:grid;gap:32px}
+.g2{grid-template-columns:1fr 1fr}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:36px 38px}
+.card p{font-size:25px;color:#46505A;margin-top:12px}
+.card h3{margin-top:4px}
+.tag{display:inline-block;font-family:var(--mono);font-size:17px;letter-spacing:.1em;text-transform:uppercase;padding:6px 14px;border-radius:999px;background:var(--paper-2);color:var(--muted)}
+.bar{height:8px;border-radius:4px;margin-bottom:26px}
+.c-amber{color:var(--amber)} .c-teal{color:var(--teal)} .c-navy{color:var(--navy)} .c-stone{color:var(--stone)}
+.b-amber{background:var(--amber)} .b-teal{background:var(--teal)} .b-navy{background:var(--navy)} .b-stone{background:var(--stone)}
+ul.clean{list-style:none}
+ul.clean li{padding-left:34px;position:relative;margin:10px 0}
+ul.clean li::before{content:"";position:absolute;left:0;top:.62em;width:14px;height:2px;background:var(--amber)}
+.num{font-family:var(--serif);font-weight:500;font-variant-numeric:tabular-nums}
+.rule{height:1px;background:var(--line);margin:28px 0}
+.bom .rule{margin:20px 0}
+.bom li{margin:4px 0;font-size:26px}
+.bom .card{padding:30px 38px}
+
+/* ---------- title ---------- */
+.title-slide{justify-content:space-between}
+.title-slide .mark{font-family:var(--mono);font-size:22px;letter-spacing:.2em;text-transform:uppercase;color:#8E98A1;display:flex;align-items:center;gap:18px}
+.title-slide .mark i{display:inline-block;width:40px;height:40px;border:2px solid var(--amber);border-radius:50%;position:relative}
+.title-slide .mark i::after{content:"";position:absolute;inset:9px;background:var(--amber);border-radius:50%}
+.title-slide h1 em{font-style:italic;color:var(--amber)}
+.title-meta{display:flex;gap:80px;font-family:var(--mono);font-size:20px;letter-spacing:.1em;text-transform:uppercase;color:#7F8A94}
+.title-meta b{display:block;color:#E4E0D7;font-weight:500;margin-top:10px;letter-spacing:.06em}
+.glow{position:absolute;right:-260px;top:-200px;width:1100px;height:1100px;border-radius:50%;
+  background:radial-gradient(circle at center, rgba(201,129,42,.22), rgba(201,129,42,0) 62%);pointer-events:none}
+.rings{position:absolute;right:90px;top:120px;opacity:.5}
+
+/* ---------- section divider ---------- */
+.section{justify-content:center}
+.section .big{font-family:var(--serif);font-size:280px;line-height:.9;color:var(--amber);font-weight:400}
+.section h2{font-size:96px;margin-top:30px;color:#F2EEE6}
+.section .lede{max-width:1200px}
+
+/* ---------- misc components ---------- */
+.is-isnt{display:grid;grid-template-columns:1fr 1fr;gap:0;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--card)}
+.is-isnt > div{padding:44px 48px}
+.is-isnt > div + div{border-left:1px solid var(--line);background:#FAF8F3}
+.is-isnt li{font-size:27px;margin:14px 0}
+.x li::before{background:var(--red)!important}
+
+.cap{display:flex;flex-direction:column;gap:10px;padding:28px 32px}
+.cap h3{font-size:28px}
+.cap .k{font-family:var(--mono);font-size:19px;color:var(--amber);letter-spacing:.1em}
+
+.flow{display:flex;align-items:stretch;gap:0}
+.flow .step{flex:1;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:30px 30px;position:relative}
+.flow .arrow{width:44px;display:flex;align-items:center;justify-content:center;color:#B7AE9E;font-size:34px;flex:none}
+.flow .step .price{font-family:var(--serif);font-size:40px;margin:14px 0 8px}
+.flow .step p{font-size:23px;color:#4A545E;margin-top:8px}
+.lead{margin-top:18px;display:flex;gap:8px;flex-wrap:wrap}
+.pill{font-family:var(--mono);font-size:15px;letter-spacing:.08em;text-transform:uppercase;padding:5px 11px;border-radius:999px;color:#fff}
+
+table.t{width:100%;border-collapse:collapse;font-size:25px}
+table.t th{font-family:var(--mono);font-weight:500;font-size:18px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:14px 18px;border-bottom:2px solid var(--text)}
+table.t td{padding:18px 18px;border-bottom:1px solid var(--line);vertical-align:top;line-height:1.35}
+table.t td.r, table.t th.r{text-align:right;font-variant-numeric:tabular-nums}
+table.t tr:last-child td{border-bottom:none}
+.who{display:block;font-family:var(--mono);font-size:15px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+td.num{white-space:nowrap;font-size:28px}
+
+.split-bar{display:flex;height:64px;border-radius:12px;overflow:hidden}
+.split-bar div{white-space:nowrap;display:flex;align-items:center;justify-content:center;color:#fff;font-family:var(--mono);font-size:20px;letter-spacing:.06em}
+
+.quote{font-family:var(--serif);font-size:54px;line-height:1.2;font-style:italic;color:var(--text);max-width:1500px}
+.dark .quote{color:#F2EEE6}
+
+.tearsheet{background:#fff;border-radius:14px;box-shadow:0 30px 80px rgba(15,27,38,.18);border:1px solid var(--line);overflow:hidden;display:flex;flex-direction:column}
+.tearsheet .ts-head{background:var(--ink);color:#EDEAE3;padding:34px 40px}
+.tearsheet .ts-head .ts-brand{font-family:var(--mono);font-size:16px;letter-spacing:.16em;text-transform:uppercase;color:var(--amber)}
+.tearsheet .ts-head h3{font-family:var(--serif);font-weight:500;font-size:40px;margin-top:10px}
+.tearsheet .ts-body{padding:30px 40px;display:grid;grid-template-columns:1fr 1fr;gap:26px 40px}
+.tearsheet h4{font-size:14px;margin-bottom:10px}
+.tearsheet p,.tearsheet li{font-size:18px;line-height:1.4;color:#3D4751}
+.tearsheet .person{margin-bottom:12px}
+.tearsheet .person b{display:block;font-size:19px;color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips span{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;border:1px solid var(--line);border-radius:999px;padding:5px 10px;color:#4A545E}
+
+.schedule{background:#fff;border:1px solid var(--line);border-radius:14px;padding:30px 34px;font-family:var(--mono);font-size:19px;line-height:1.7;color:#2B3540}
+.schedule .row{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding:4px 0}
+.schedule .row:last-child{border-bottom:none}
+.schedule .row span:first-child{color:var(--muted)}
+.schedule .hd{font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:10px 0 2px}
+
+.nav-hint{position:fixed;right:18px;bottom:14px;font-family:var(--mono);font-size:12px;color:#56626C;letter-spacing:.08em;z-index:5;user-select:none}
+.progress{position:fixed;left:0;top:0;height:3px;background:var(--amber);z-index:5;transition:width .25s ease}
+
+@media print{
+  @page{size:1920px 1080px;margin:0}
+  html,body{height:auto;overflow:visible;background:var(--paper)}
+  .stage{position:static;display:block}
+  .deck{transform:none!important;width:1920px;height:auto}
+  .slide{position:relative;display:flex!important;page-break-after:always;break-after:page}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  .nav-hint,.progress{display:none}
+  *{-webkit-print-color-adjust:exact;print-color-adjust:exact}
+}
+</style>
+</head>
+<body>
+<div class="progress" id="progress"></div>
+<div class="stage"><div class="deck" id="deck">
+
+<!-- 01 TITLE -->
+<section class="slide dark title-slide">
+  <div class="glow"></div>
+  <svg class="rings" width="720" height="720" viewBox="0 0 720 720" fill="none" aria-hidden="true">
+    <circle cx="360" cy="360" r="340" stroke="#2A3B4B" stroke-width="1.5"/>
+    <circle cx="360" cy="360" r="250" stroke="#2A3B4B" stroke-width="1.5"/>
+    <circle cx="360" cy="360" r="160" stroke="#3A4A58" stroke-width="1.5"/>
+    <circle cx="360" cy="360" r="70" stroke="#C9812A" stroke-width="2"/>
+    <circle cx="360" cy="20" r="10" fill="#C9812A"/>
+    <circle cx="610" cy="360" r="10" fill="#2E6E68"/>
+    <circle cx="200" cy="360" r="10" fill="#6D8DC0"/>
+  </svg>
+  <div class="mark"><i></i>Elishah · Partner Network</div>
+  <div>
+    <h1>Build. Operate.<br><em>Maintain.</em></h1>
+    <p class="lede" style="max-width:1150px">How Elishah, our product partner and our industry partners take private enterprise AI into energy and industry, and how we share what we earn.</p>
+  </div>
+  <div class="title-meta">
+    <div>Prepared for<b>Dimuthu &amp; our Industry Partner</b></div>
+    <div>Presented by<b>Joel Tong, Elishah</b></div>
+    <div>Date<b>September 2026</b></div>
+    <div>Status<b>Confidential · For discussion</b></div>
+  </div>
+</section>
+
+<!-- 02 AGENDA -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">00</span>What we agree today</div>
+  <h2>Three things to agree before the first meeting with a customer.</h2>
+  <div class="body">
+    <div class="grid g3">
+      <div class="card"><div class="bar b-amber"></div><h4>01 · Position</h4><h3 style="margin-top:14px">What we sell, and to whom</h3><p>One product to open doors, a narrow set of buyers, and a clear list of things we don't do.</p></div>
+      <div class="card"><div class="bar b-teal"></div><h4>02 · Operating model</h4><h3 style="margin-top:14px">Who does what</h3><p>Three roles behind one Elishah contract. The deal stages, and two ways to sell: BO or BOM.</p></div>
+      <div class="card"><div class="bar b-navy"></div><h4>03 · Economics &amp; protection</h4><h3 style="margin-top:14px">How we get paid</h3><p>A 10% platform reserve, a 50 / 25 / 25 profit split earned by activity, IP rules, and protections for each partner.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 03 SECTION -->
+<section class="slide dark section">
+  <div class="big">01</div>
+  <h2>Position</h2>
+  <p class="lede">We are not an oil-and-gas engineering consultancy. We build the software around the operation.</p>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 04 IS / ISN'T -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">01</span>Position</div>
+  <h2>Elishah builds the digital, payments and AI infrastructure around industrial operations.</h2>
+  <div class="body">
+    <div class="is-isnt">
+      <div>
+        <h4 class="c-teal" style="color:var(--teal)">Where we play</h4>
+        <ul class="clean" style="margin-top:16px">
+          <li>Private knowledge AI over manuals, SOPs, work orders and contracts</li>
+          <li>AI gateway: permissions, model routing, approvals, audit</li>
+          <li>B2B billing, settlement and reconciliation (the layer between commercial systems and SAP)</li>
+          <li>Fuel, fleet and EV payments</li>
+          <li>Procurement leakage: contract ↔ PO ↔ receipt ↔ invoice</li>
+        </ul>
+      </div>
+      <div>
+        <h4 style="color:var(--red)">Where we partner, not compete</h4>
+        <ul class="clean x" style="margin-top:16px">
+          <li>Reservoir modelling and seismic interpretation</li>
+          <li>Drilling optimisation</li>
+          <li>Refinery process control, SCADA, autonomous plant control</li>
+        </ul>
+        <p class="muted" style="font-size:24px;margin-top:26px">That work takes decades of process engineering. SLB, Baker Hughes, Honeywell, Siemens, ABB and Yokogawa own the domain. We build the software around it.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 05 WEDGE PRODUCT -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">01</span>The door-opener</div>
+  <h2>Elishah Intelligence: <span style="font-style:italic">ask your entire company, securely.</span></h2>
+  <p class="lede">A private, ChatGPT-style system that runs inside the customer's own infrastructure and answers from their own knowledge. Claude and ChatGPT are used only where company policy allows.</p>
+  <div class="body">
+    <div class="grid g3" style="gap:26px">
+      <div class="card cap"><span class="k">01 · CONNECT</span><h3>SharePoint, drives, Confluence, databases, ERP exports, email archives</h3></div>
+      <div class="card cap"><span class="k">02 · UNDERSTAND</span><h3>PDFs, scans, spreadsheets, drawings, contracts, tables</h3></div>
+      <div class="card cap"><span class="k">03 · RETRIEVE</span><h3>Keyword + semantic + metadata search, with re-ranking</h3></div>
+      <div class="card cap"><span class="k">04 · ANSWER</span><h3>Every answer cites the source document it came from</h3></div>
+      <div class="card cap"><span class="k">05 · CONTROL</span><h3>If you can't open the file, the AI can't tell you what's in it</h3></div>
+      <div class="card cap"><span class="k">06 · AUDIT</span><h3>Who asked what, which model answered, what left the building</h3></div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 06 ROUTING + DEPLOYMENT -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">01</span>Why it wins procurement</div>
+  <h2>The customer owns the platform. The model is a replaceable supplier.</h2>
+  <div class="body" style="flex-direction:row;gap:56px;align-items:center">
+    <svg width="980" height="600" viewBox="0 0 980 600" fill="none" font-family="Inter, sans-serif" aria-label="Request routing diagram">
+      <defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#9C9385"/></marker></defs>
+      <!-- left column -->
+      <g font-size="22" fill="#18222C">
+        <rect x="0" y="20" width="330" height="70" rx="12" fill="#fff" stroke="#D9D1C1"/><text x="24" y="63">Employee asks a question</text>
+        <rect x="0" y="130" width="330" height="70" rx="12" fill="#D8E0EC" stroke="#2A4A7A"/><text x="24" y="173">Identity + permissions</text>
+        <rect x="0" y="240" width="330" height="70" rx="12" fill="#D8E0EC" stroke="#2A4A7A"/><text x="24" y="283">Sensitivity classifier</text>
+        <rect x="0" y="350" width="330" height="70" rx="12" fill="#D8E0EC" stroke="#2A4A7A"/><text x="24" y="393">Retrieval from company data</text>
+        <rect x="0" y="460" width="330" height="90" rx="12" fill="#0F1B26"/><text x="24" y="500" fill="#F3E3CC" font-weight="600">Policy engine</text><text x="24" y="530" fill="#9AA6B1" font-size="18">customer-defined rules</text>
+      </g>
+      <g stroke="#9C9385" stroke-width="2" marker-end="url(#ah)">
+        <line x1="165" y1="90" x2="165" y2="126"/><line x1="165" y1="200" x2="165" y2="236"/><line x1="165" y1="310" x2="165" y2="346"/><line x1="165" y1="420" x2="165" y2="456"/>
+        <path d="M330 505 C 420 505 420 110 500 110"/>
+        <path d="M330 505 C 430 505 430 290 500 290"/>
+        <path d="M330 505 C 440 505 440 470 500 470"/>
+      </g>
+      <g font-size="22">
+        <rect x="505" y="60" width="470" height="100" rx="14" fill="#fff" stroke="#2E6E68" stroke-width="2"/>
+        <text x="530" y="100" fill="#2E6E68" font-weight="600">Restricted → local model</text>
+        <text x="530" y="134" fill="#4A545E" font-size="19">Qwen / Llama / Mistral on customer GPUs</text>
+        <rect x="505" y="240" width="470" height="100" rx="14" fill="#fff" stroke="#2A4A7A" stroke-width="2"/>
+        <text x="530" y="280" fill="#2A4A7A" font-weight="600">Confidential → private model</text>
+        <text x="530" y="314" fill="#4A545E" font-size="19">dedicated VPC / sovereign cloud</text>
+        <rect x="505" y="420" width="470" height="100" rx="14" fill="#fff" stroke="#C9812A" stroke-width="2"/>
+        <text x="530" y="460" fill="#C9812A" font-weight="600">Approved → frontier model</text>
+        <text x="530" y="494" fill="#4A545E" font-size="19">Claude · ChatGPT · Gemini</text>
+      </g>
+      <text x="505" y="578" font-size="20" fill="#6A6F76">Every path: cited answer + audit record.</text>
+    </svg>
+    <div style="flex:1">
+      <h4>Four deployment modes, one codebase</h4>
+      <table class="t" style="margin-top:16px;font-size:23px">
+        <tr><td><b>Air-gapped</b><br><span class="muted">Everything on-prem. No internet.</span></td></tr>
+        <tr><td><b>Private VPC</b><br><span class="muted">Customer cloud, dedicated GPUs.</span></td></tr>
+        <tr><td><b>Hybrid</b><br><span class="muted">Sensitive work stays local; approved tasks go to frontier models.</span></td></tr>
+        <tr><td><b>Frontier-first</b><br><span class="muted">Frontier models do most inference. Knowledge, permissions and audit stay with the customer.</span></td></tr>
+      </table>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 07 WHO WE SELL TO -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">01</span>Who we sell to first</div>
+  <h2>Aramco and ADNOC are logos #20–50, not #1.</h2>
+  <p class="lede">The majors have large in-house AI teams. A US$1–10B operator has the same problems without a thousand engineers working on them.</p>
+  <div class="body">
+    <div class="grid g2" style="gap:44px">
+      <div class="card">
+        <h4>Target accounts</h4>
+        <div class="chips" style="margin-top:20px;gap:12px">
+          <span style="font-size:18px;padding:8px 16px">Independent oil companies</span><span style="font-size:18px;padding:8px 16px">NOC subsidiaries</span><span style="font-size:18px;padding:8px 16px">Refineries</span><span style="font-size:18px;padding:8px 16px">Storage terminals</span><span style="font-size:18px;padding:8px 16px">Fuel distributors</span><span style="font-size:18px;padding:8px 16px">LPG &amp; lubricants</span><span style="font-size:18px;padding:8px 16px">Shipping &amp; bunkering</span><span style="font-size:18px;padding:8px 16px">Fuel retailers</span><span style="font-size:18px;padding:8px 16px">Oilfield services</span><span style="font-size:18px;padding:8px 16px">EPC contractors</span><span style="font-size:18px;padding:8px 16px">Industrial distributors</span>
+        </div>
+      </div>
+      <div class="card">
+        <h4>Buyers to reach</h4>
+        <table class="t" style="margin-top:10px;font-size:24px">
+          <tr><td><b>Head of Digital / CTO / COO</b></td><td class="muted">Knowledge AI, operations copilot</td></tr>
+          <tr><td><b>CIO / CISO</b></td><td class="muted">AI gateway, governance, sovereignty</td></tr>
+          <tr><td><b>CFO / Procurement</b></td><td class="muted">Leakage, billing, reconciliation</td></tr>
+          <tr><td><b>Downstream / Mobility</b></td><td class="muted">Fleet, fuel card and EV payments</td></tr>
+        </table>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 08 PORTFOLIO PATH -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">01</span>What the partners carry into the room</div>
+  <h2>Four named products, not "Joel has a software company".</h2>
+  <div class="body">
+    <div class="grid g4" style="gap:26px">
+      <div class="card" style="border:2px solid var(--amber)"><span class="tag" style="background:var(--amber);color:#fff">Now · the wedge</span><h3 style="margin-top:22px">Elishah Intelligence</h3><p>Private AI over company knowledge, with agent workflows added later.</p></div>
+      <div class="card"><span class="tag">Next</span><h3 style="margin-top:22px">Elishah Energy Ledger</h3><p>B2B billing, settlement, reconciliation and treasury, sitting between commercial systems and the ERP.</p></div>
+      <div class="card"><span class="tag">Next</span><h3 style="margin-top:22px">Elishah Mobility</h3><p>Fuel cards, fleet controls, EV charging, dealer settlement, fraud and consolidated invoicing.</p></div>
+      <div class="card"><span class="tag">Later</span><h3 style="margin-top:22px">Elishah Provenance</h3><p>Methane and carbon evidence packs, shipment by shipment, for Gulf exporters and EU importers.</p></div>
+    </div>
+    <div class="rule" style="margin-top:44px"></div>
+    <p style="font-size:27px;color:#3C4650;max-width:1600px">Intelligence opens the account. Once we're inside, we find the expensive workflows, and those tell us which product to build next or which company to buy.</p>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 09 SECTION -->
+<section class="slide dark section">
+  <div class="big">02</div>
+  <h2>Operating model</h2>
+  <p class="lede">We pay for the role, not the person. That keeps working when we have ten industry partners and three delivery teams.</p>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 10 THREE ENGINES -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">02</span>Three roles and a platform</div>
+  <h2>Each role has one owner and a clear set of duties.</h2>
+  <div class="body">
+    <div class="grid g4" style="gap:24px">
+      <div class="card"><div class="bar b-amber"></div><h4>Origination &amp; commercial</h4><h3 style="margin-top:10px">Industry Partner</h3>
+        <ul class="clean" style="margin-top:14px"><li style="font-size:23px">Access and introductions</li><li style="font-size:23px">Account intelligence</li><li style="font-size:23px">Handling procurement and politics</li><li style="font-size:23px">Closing and collection</li></ul></div>
+      <div class="card"><div class="bar b-teal"></div><h4>Product &amp; solutioning</h4><h3 style="margin-top:10px">Dimuthu</h3>
+        <ul class="clean" style="margin-top:14px"><li style="font-size:23px">Discovery and problem framing</li><li style="font-size:23px">Rapid prototypes and demos</li><li style="font-size:23px">Pre-sales and proposals</li><li style="font-size:23px">Introductions to partners (BlackRock network and others)</li></ul></div>
+      <div class="card"><div class="bar b-navy"></div><h4>Engineering &amp; delivery</h4><h3 style="margin-top:10px">Joel / Elishah</h3>
+        <ul class="clean" style="margin-top:14px"><li style="font-size:23px">Architecture and build</li><li style="font-size:23px">Forward-deployed engineers</li><li style="font-size:23px">Engineering capacity in Singapore and Hanoi</li><li style="font-size:23px">Seeing every project through to completion</li></ul></div>
+      <div class="card" style="background:var(--stone-soft)"><div class="bar b-stone"></div><h4>IP &amp; platform</h4><h3 style="margin-top:10px">Elishah</h3>
+        <ul class="clean" style="margin-top:14px"><li style="font-size:23px">Retrieval engine, gateway, connectors</li><li style="font-size:23px">Workflow, agents, audit</li><li style="font-size:23px">Security and upgrades</li><li style="font-size:23px">Every improvement reused on the next deal</li></ul></div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 11 ONE FACE -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">02</span>How the customer sees us</div>
+  <h2>One contract, one counterparty, one party accountable.</h2>
+  <div class="body" style="flex-direction:row;gap:70px;align-items:center">
+    <svg width="900" height="620" viewBox="0 0 900 620" fill="none" font-family="Inter, sans-serif" aria-label="Structure diagram">
+      <defs><marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto"><path d="M0 0L10 5L0 10z" fill="#9C9385"/></marker></defs>
+      <rect x="250" y="10" width="400" height="90" rx="14" fill="#E6E0D5" stroke="#8C8171"/>
+      <text x="450" y="50" text-anchor="middle" font-size="24" font-weight="600" fill="#18222C">Elishah IP · 100%</text>
+      <text x="450" y="80" text-anchor="middle" font-size="18" fill="#6A6F76">platform, gateway, connectors, workflow</text>
+      <line x1="450" y1="100" x2="450" y2="156" stroke="#9C9385" stroke-width="2" marker-end="url(#ah2)"/>
+      <text x="470" y="136" font-size="17" fill="#6A6F76" font-family="IBM Plex Mono, monospace">licences</text>
+      <rect x="200" y="160" width="500" height="100" rx="14" fill="#0F1B26"/>
+      <text x="450" y="204" text-anchor="middle" font-size="28" font-weight="600" fill="#F5F2EB">Elishah</text>
+      <text x="450" y="236" text-anchor="middle" font-size="18" fill="#9AA6B1">contracting party · delivery assurance</text>
+      <g stroke="#9C9385" stroke-width="2">
+        <line x1="150" y1="330" x2="750" y2="330"/>
+        <line x1="450" y1="260" x2="450" y2="330"/>
+        <line x1="150" y1="330" x2="150" y2="350"/><line x1="450" y1="330" x2="450" y2="350"/><line x1="750" y1="330" x2="750" y2="350"/>
+      </g>
+      <rect x="20" y="350" width="260" height="100" rx="14" fill="#F3E3CC" stroke="#C9812A"/>
+      <text x="150" y="392" text-anchor="middle" font-size="22" font-weight="600" fill="#18222C">Industry Partner</text>
+      <text x="150" y="422" text-anchor="middle" font-size="17" fill="#6A6F76">commercial</text>
+      <rect x="320" y="350" width="260" height="100" rx="14" fill="#D5E6E3" stroke="#2E6E68"/>
+      <text x="450" y="392" text-anchor="middle" font-size="22" font-weight="600" fill="#18222C">Product Partner</text>
+      <text x="450" y="422" text-anchor="middle" font-size="17" fill="#6A6F76">product</text>
+      <rect x="620" y="350" width="260" height="100" rx="14" fill="#D8E0EC" stroke="#2A4A7A"/>
+      <text x="750" y="392" text-anchor="middle" font-size="22" font-weight="600" fill="#18222C">Elishah Delivery</text>
+      <text x="750" y="422" text-anchor="middle" font-size="17" fill="#6A6F76">engineering</text>
+      <g stroke="#9C9385" stroke-width="2"><line x1="150" y1="450" x2="150" y2="490"/><line x1="450" y1="450" x2="450" y2="490"/><line x1="750" y1="450" x2="750" y2="490"/><line x1="150" y1="490" x2="750" y2="490"/><line x1="450" y1="490" x2="450" y2="526" marker-end="url(#ah2)"/></g>
+      <rect x="300" y="530" width="300" height="80" rx="14" fill="#fff" stroke="#18222C" stroke-width="2"/>
+      <text x="450" y="578" text-anchor="middle" font-size="24" font-weight="600" fill="#18222C">Customer</text>
+    </svg>
+    <div style="flex:1">
+      <ul class="clean">
+        <li><b>Elishah signs every contract.</b> The customer never sees three freelancers working together.</li>
+        <li><b>Partners are introduced by title:</b> Elishah Industry Partner, Elishah Product Partner.</li>
+        <li><b>Elishah owns the IP</b> and licenses it into each deployment. The IP is never co-owned deal by deal.</li>
+        <li><b>Partners share in the profit</b> of the deals they create, shape and support.</li>
+      </ul>
+      <p class="muted" style="font-size:23px;margin-top:24px">Later we can add a regional OpCo or JV (e.g. Elishah Industrial Systems). It would license IP from Elishah and change nothing about how partners are paid.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 12 DEAL LIFECYCLE -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">02</span>Deal lifecycle</div>
+  <h2>Every stage is paid. Nothing is built for free.</h2>
+  <div class="body">
+    <div class="flow">
+      <div class="step"><h4>0 · Register</h4><div class="price">Free</div><p>Partner registers the account and buying centre. Deal schedule drafted.</p><div class="lead"><span class="pill b-amber">Partner</span></div></div>
+      <div class="arrow">→</div>
+      <div class="step"><h4>1 · Discovery</h4><div class="price">$15–30k</div><p>2–4 weeks. Map the workflow, the data and the systems. Build the business case.</p><div class="lead"><span class="pill b-teal">Product</span><span class="pill b-amber">Partner</span></div></div>
+      <div class="arrow">→</div>
+      <div class="step"><h4>2 · Pilot</h4><div class="price">$50–150k</div><p>6–12 weeks. Working system on real data, with agreed success criteria.</p><div class="lead"><span class="pill b-navy">Delivery</span><span class="pill b-teal">Product</span></div></div>
+      <div class="arrow">→</div>
+      <div class="step"><h4>3 · Production</h4><div class="price">$250k–1m+</div><p>Hardened rollout, integrations, security review, SLAs, training.</p><div class="lead"><span class="pill b-navy">Delivery</span></div></div>
+      <div class="arrow">→</div>
+      <div class="step" style="border:2px solid var(--amber)"><h4>4 · Run</h4><div class="price">$5–30k+/mo</div><p>Platform licence, managed service, model and GPU usage.</p><div class="lead"><span class="pill b-navy">Delivery</span><span class="pill b-amber">Partner</span></div></div>
+    </div>
+    <p class="muted" style="font-size:22px;margin-top:34px">These price bands are how we package our work, not industry benchmarks. Each customer should fund a reusable piece of Elishah IP. That's what keeps us from becoming a body shop.</p>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 13 BO vs BOM -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">02</span>Two ways to contract</div>
+  <h2>BOM keeps us on for years. It's the one we push.</h2>
+  <div class="body">
+    <div class="grid g2 bom" style="gap:40px">
+      <div class="card">
+        <span class="tag">BO</span>
+        <h3 style="margin-top:18px;font-size:40px;font-family:var(--serif);font-weight:500">Build + Operate</h3>
+        <p>We build it and run it through launch and hypercare. Then the customer's team takes over.</p>
+        <div class="rule"></div>
+        <h4>Commercials</h4>
+        <ul class="clean" style="margin-top:10px"><li>Build fee</li><li>Platform licence</li><li>Optional support retainer</li></ul>
+        <div class="rule"></div>
+        <p style="margin-top:0"><b>Fits:</b> customers with strong internal IT who insist on running it themselves.</p>
+      </div>
+      <div class="card" style="border:2px solid var(--amber);background:#FFFDF9">
+        <span class="tag" style="background:var(--amber);color:#fff">BOM · preferred</span>
+        <h3 style="margin-top:18px;font-size:40px;font-family:var(--serif);font-weight:500">Build + Operate + Maintain</h3>
+        <p>Elishah stays accountable for deployment, models, monitoring, security patches, connectors, upgrades, SLAs and how the platform evolves.</p>
+        <div class="rule"></div>
+        <h4>Commercials</h4>
+        <ul class="clean" style="margin-top:10px"><li>Implementation fee</li><li>Annual platform licence</li><li>Managed-service fee</li><li>Usage: GPU and model pass-through plus margin</li></ul>
+        <div class="rule"></div>
+        <p style="margin-top:0"><b>Why we push it:</b> recurring revenue for all three of us, and it turns consulting into a software asset.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 14 SECTION -->
+<section class="slide dark section">
+  <div class="big">03</div>
+  <h2>Economics</h2>
+  <p class="lede">Simple enough to explain over lunch, and precise enough that nobody argues about it later.</p>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 15 WATERFALL DEFINITION -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">03</span>The money waterfall</div>
+  <h2>We split Project Contribution Profit, and we define it on paper.</h2>
+  <div class="body" style="flex-direction:row;gap:60px;align-items:stretch">
+    <div style="flex:1.1;display:flex;flex-direction:column;gap:14px">
+      <div class="card" style="padding:24px 32px;display:flex;justify-content:space-between;align-items:center"><h3>Cash collected from customer</h3><span class="tag">start</span></div>
+      <div class="card" style="padding:24px 32px;display:flex;justify-content:space-between;align-items:center;margin-left:40px"><h3 class="muted" style="font-weight:500">− Taxes (GST / VAT) &amp; pass-through</h3></div>
+      <div class="card" style="padding:24px 32px;display:flex;justify-content:space-between;align-items:center;margin-left:40px;background:var(--stone-soft)"><h3>− 10% Platform / IP reserve</h3><span class="tag" style="background:var(--stone);color:#fff">stays in Elishah</span></div>
+      <div class="card" style="padding:24px 32px;display:flex;justify-content:space-between;align-items:center;margin-left:40px"><h3 class="muted" style="font-weight:500">− Direct delivery costs</h3></div>
+      <div class="card" style="padding:24px 32px;background:var(--ink);color:#F5F2EB;border:none"><h3>= Project Contribution Profit (PCP)</h3>
+        <div class="split-bar" style="margin-top:18px"><div class="b-navy" style="flex:50">50 · Engineering</div><div class="b-teal" style="flex:25">25 · Product</div><div class="b-amber" style="flex:25">25 · Comm.</div></div>
+      </div>
+    </div>
+    <div style="flex:1" class="grid">
+      <div class="card" style="padding:30px 34px">
+        <h4 style="color:var(--teal)">Allowed deductions (fixed schedule)</h4>
+        <ul class="clean" style="margin-top:12px"><li style="font-size:24px;margin:6px 0">Third-party software and licences</li><li style="font-size:24px;margin:6px 0">Cloud and GPU costs</li><li style="font-size:24px;margin:6px 0">Customer-specific hardware</li><li style="font-size:24px;margin:6px 0">Pre-approved travel</li><li style="font-size:24px;margin:6px 0">External subcontractors</li><li style="font-size:24px;margin:6px 0">Direct FDE and engineering time at agreed rate cards</li></ul>
+      </div>
+      <div class="card" style="padding:30px 34px">
+        <h4 style="color:var(--red)">Never deducted</h4>
+        <ul class="clean x" style="margin-top:12px"><li style="font-size:24px;margin:6px 0">"Corporate overhead" or "management fees"</li><li style="font-size:24px;margin:6px 0">Anything not listed in the schedule</li></ul>
+        <p style="font-size:22px;margin-top:10px">Open books on every deal. Partners can see every line.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 16 POOLS -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">03</span>50 / 25 / 25, earned by activity</div>
+  <h2>The pools belong to roles, and you earn the points by doing the work.</h2>
+  <div class="body">
+    <div class="grid g3" style="gap:30px">
+      <div class="card"><div class="bar b-navy"></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><h3>Engineering</h3><span class="num c-navy" style="font-size:72px">50</span></div>
+        <p style="margin-top:6px">Carries the delivery risk: the FDE bench, warranties, support, security, infrastructure, seeing the project through, and ongoing IP investment.</p>
+        <p style="font-size:22px;margin-top:18px" class="muted">Why it's the biggest pool: this is where a failed project costs money. It doesn't mean anyone is worth twice as much.</p>
+      </div>
+      <div class="card"><div class="bar b-teal"></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><h3>Product</h3><span class="num c-teal" style="font-size:72px">25</span></div>
+        <table class="t" style="margin-top:14px;font-size:23px">
+          <tr><td>Discovery &amp; solutioning</td><td class="r num" style="font-size:30px">10</td></tr>
+          <tr><td>Demo, proposal, prototype</td><td class="r num" style="font-size:30px">10</td></tr>
+          <tr><td>Ongoing product ownership</td><td class="r num" style="font-size:30px">5</td></tr>
+        </table>
+      </div>
+      <div class="card"><div class="bar b-amber"></div>
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><h3>Commercial</h3><span class="num c-amber" style="font-size:72px">25</span></div>
+        <table class="t" style="margin-top:14px;font-size:23px">
+          <tr><td>Origination: qualified intro that becomes an opportunity</td><td class="r num" style="font-size:30px">10</td></tr>
+          <tr><td>Close: meetings, procurement, contract</td><td class="r num" style="font-size:30px">10</td></tr>
+          <tr><td>Account stewardship, expansion, collection</td><td class="r num" style="font-size:30px">5</td></tr>
+        </table>
+      </div>
+    </div>
+    <p style="font-size:26px;margin-top:36px;color:#3C4650">Anyone can earn from more than one pool. Handing over a phone number earns less than getting the CEO to sign after nine months of work.</p>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 17 WORKED EXAMPLE -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">03</span>Worked example · illustrative</div>
+  <h2>A US$500k build for a Gulf energy company.</h2>
+  <div class="body" style="flex-direction:row;gap:60px;align-items:center">
+    <svg width="1060" height="600" viewBox="0 0 1060 600" font-family="Inter, sans-serif" aria-label="Waterfall of a 500k deal">
+      <!-- scale: 1k = 1px, baseline y=540, 500k -> height 500 -->
+      <g font-family="IBM Plex Mono, monospace" font-size="16" fill="#9A9489">
+        <line x1="60" y1="540" x2="1050" y2="540" stroke="#D9D1C1"/>
+        <line x1="60" y1="290" x2="1050" y2="290" stroke="#ECE6DA" stroke-dasharray="4 6"/><text x="0" y="295">250k</text>
+        <line x1="60" y1="40" x2="1050" y2="40" stroke="#ECE6DA" stroke-dasharray="4 6"/><text x="0" y="45">500k</text>
+      </g>
+      <!-- bars: width 92, gap 30 ; x start 80 -->
+      <rect x="80" y="40" width="92" height="500" rx="4" fill="#18222C"/>
+      <rect x="202" y="40" width="92" height="50" rx="4" fill="#8C8171"/>
+      <rect x="324" y="90" width="92" height="140" rx="4" fill="#C8BFAE"/>
+      <rect x="446" y="230" width="92" height="25" rx="4" fill="#C8BFAE"/>
+      <rect x="568" y="255" width="92" height="15" rx="4" fill="#C8BFAE"/>
+      <rect x="690" y="270" width="92" height="270" rx="4" fill="#0F1B26"/>
+      <rect x="812" y="405" width="70" height="135" rx="4" fill="#2A4A7A"/>
+      <rect x="890" y="472.5" width="70" height="67.5" rx="4" fill="#2E6E68"/>
+      <rect x="968" y="472.5" width="70" height="67.5" rx="4" fill="#C9812A"/>
+      <g stroke="#B7AE9E" stroke-dasharray="3 4"><line x1="172" y1="40" x2="202" y2="40"/><line x1="294" y1="90" x2="324" y2="90"/><line x1="416" y1="230" x2="446" y2="230"/><line x1="538" y1="255" x2="568" y2="255"/><line x1="660" y1="270" x2="690" y2="270"/></g>
+      <g font-size="22" font-weight="600" fill="#18222C" text-anchor="middle">
+        <text x="126" y="28">500</text><text x="248" y="28">−50</text><text x="370" y="80">−140</text><text x="492" y="220">−25</text><text x="614" y="245">−15</text><text x="736" y="258">270</text>
+        <text x="847" y="393">135</text><text x="925" y="460">67.5</text><text x="1003" y="460">67.5</text>
+      </g>
+      <g font-size="17" fill="#4A545E" text-anchor="middle">
+        <text x="126" y="568">Revenue</text><text x="248" y="568">IP reserve</text><text x="370" y="568">FDEs</text><text x="492" y="568">GPU/cloud</text><text x="614" y="568">Travel</text><text x="736" y="568" font-weight="600" fill="#18222C">PCP</text>
+        <text x="847" y="568">Eng.</text><text x="925" y="568">Product</text><text x="1003" y="568">Comm.</text>
+      </g>
+    </svg>
+    <div style="flex:1">
+      <table class="t">
+        <tr><th>Participant</th><th class="r">US$k</th></tr>
+        <tr><td><span class="c-navy">●</span> Elishah · Engineering</td><td class="r num" style="font-size:32px">135.0</td></tr>
+        <tr><td><span class="c-teal">●</span> Dimuthu · Product</td><td class="r num" style="font-size:32px">67.5</td></tr>
+        <tr><td><span class="c-amber">●</span> Partner · Commercial</td><td class="r num" style="font-size:32px">67.5</td></tr>
+        <tr><td><span class="c-stone">●</span> Elishah platform reserve</td><td class="r num" style="font-size:32px">50.0</td></tr>
+      </table>
+      <p class="muted" style="font-size:22px;margin-top:22px">The reserve is company capital. It pays for platform development, security, models and connectors, and none of it goes to anyone personally. Without it, each deal would pay out everything and nothing would fund the asset.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 18 RECURRING -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">03</span>Recurring revenue &amp; expansion</div>
+  <h2>We reward landing an account and growing it, not introducing it and walking away.</h2>
+  <div class="body" style="flex-direction:row;gap:64px;align-items:center">
+    <div style="flex:1.25">
+      <h4 style="margin-bottom:18px">BOM run revenue: split of PCP by contract year (partners active)</h4>
+      <div style="display:grid;grid-template-columns:130px 1fr;gap:18px 20px;align-items:center">
+        <span class="num" style="font-size:30px">Year 1</span>
+        <div class="split-bar"><div class="b-navy" style="flex:50">50</div><div class="b-teal" style="flex:25">25</div><div class="b-amber" style="flex:25">25</div></div>
+        <span class="num" style="font-size:30px">Year 2</span>
+        <div class="split-bar"><div class="b-navy" style="flex:60">60</div><div class="b-teal" style="flex:20">20</div><div class="b-amber" style="flex:20">20</div></div>
+        <span class="num" style="font-size:30px">Year 3+</span>
+        <div class="split-bar"><div class="b-navy" style="flex:70">70</div><div class="b-teal" style="flex:15">15</div><div class="b-amber" style="flex:15">15</div></div>
+      </div>
+      <p class="muted" style="font-size:22px;margin-top:22px">Engineering's share rises because running and maintaining the system becomes most of the work.</p>
+    </div>
+    <div style="flex:1" class="grid">
+      <div class="card" style="padding:28px 32px"><h4 style="color:var(--amber)">Partner still active</h4><p style="margin-top:8px">Keeps the active share (20 → 15) for the life of the contract.</p></div>
+      <div class="card" style="padding:28px 32px"><h4 style="color:var(--red)">Partner steps back</h4><p style="margin-top:8px">Moves to a 10% commercial tail until the end of Year 3, then zero.</p></div>
+      <div class="card" style="padding:28px 32px;border:2px solid var(--amber)"><h4 style="color:var(--teal)">Expansion resets to 25</h4><p style="margin-top:8px">A new subsidiary, country or product the partner creates is a new deal, with a fresh commercial pool. For example, ADNOC → ADNOC Drilling, or UAE → KSA.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 19 SCENARIOS -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">03</span>Who earns what</div>
+  <h2>The same US$270k of PCP, four ways a deal happens.</h2>
+  <div class="body">
+    <table class="t" style="font-size:25px">
+      <tr><th style="width:36%">Scenario</th><th class="r">Engineering</th><th class="r">Product</th><th class="r">Commercial</th><th style="width:26%">Notes</th></tr>
+      <tr><td><b>A · Partner works the full cycle</b><br><span class="muted" style="font-size:21px">Intro, close, stewardship</span></td><td class="r num"><span class="who">Elishah</span> $135k</td><td class="r num"><span class="who">Dimuthu</span> $67.5k</td><td class="r num"><span class="who">Partner</span> $67.5k</td><td class="muted" style="font-size:21px">Default case: 50 / 25 / 25</td></tr>
+      <tr><td><b>B · Partner makes the intro only</b><br><span class="muted" style="font-size:21px">Someone else closes</span></td><td class="r num"><span class="who">Elishah</span> $135k</td><td class="r num"><span class="who">Dimuthu</span> $67.5k</td><td class="r num"><span class="who">Partner</span> $27k<br><span class="muted" style="font-size:20px">closer $40.5k</span></td><td class="muted" style="font-size:21px">10 origination points; 15 go to whoever closes and looks after the account</td></tr>
+      <tr><td><b>C · Dimuthu originates and closes</b><br><span class="muted" style="font-size:21px">No industry partner involved</span></td><td class="r num"><span class="who">Elishah</span> $135k</td><td class="r num" colspan="2" style="text-align:center"><span class="who">Dimuthu</span> $135k</td><td class="muted" style="font-size:21px">Product 25 + Commercial 25</td></tr>
+      <tr><td><b>D · Joel originates, partner closes</b><br><span class="muted" style="font-size:21px">Partner handles procurement</span></td><td class="r num"><span class="who">Elishah</span> $135k<br><span class="muted" style="font-size:20px">+ Joel orig. $27k</span></td><td class="r num"><span class="who">Dimuthu</span> $67.5k</td><td class="r num"><span class="who">Partner</span> $40.5k</td><td class="muted" style="font-size:21px">10 origination points to Joel; 15 close and stewardship points to the partner</td></tr>
+    </table>
+    <p class="muted" style="font-size:22px;margin-top:26px">1 point = 1% of PCP = $2.7k in this example. Everyone agrees the points in writing on the deal schedule before the proposal goes out.</p>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 20 SECTION -->
+<section class="slide dark section">
+  <div class="big">04</div>
+  <h2>IP, protection &amp; governance</h2>
+  <p class="lede">What each of us owns, how each of us is protected, and how we stay clean in a high-risk region.</p>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 21 IP BUCKETS -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">04</span>IP in every contract</div>
+  <h2>Four IP buckets, written into every MSA.</h2>
+  <div class="body">
+    <div class="grid g4" style="gap:24px">
+      <div class="card" style="background:var(--stone-soft)"><h4>A · Background IP</h4><h3 style="margin-top:14px">100% Elishah</h3><p>Everything Elishah owned before the engagement.</p></div>
+      <div class="card" style="background:var(--stone-soft)"><h4>B · Platform improvements</h4><h3 style="margin-top:14px">100% Elishah</h3><p>Generic work built during a project: retrieval, connectors, model router, workflow. This applies even when the customer paid for it. They get a licence.</p></div>
+      <div class="card"><h4>C · Customer-specific</h4><h3 style="margin-top:14px">Negotiable</h3><p>Their configuration, workflows, prompts and business rules. Can be licensed exclusively or assigned to them. Elishah keeps the underlying building blocks.</p></div>
+      <div class="card" style="border:2px solid var(--teal)"><h4>D · Customer data</h4><h3 style="margin-top:14px">100% Customer</h3><p>Documents, embeddings, logs, operational data. No ambiguity, and this is central to how we sell sovereignty.</p></div>
+    </div>
+    <div class="card" style="margin-top:32px;display:flex;gap:40px;align-items:center;background:var(--ink);color:#EDEAE3;border:none">
+      <h4 style="color:var(--amber);flex:none;width:320px">"We must own it"</h4>
+      <p style="color:#C9CFD4;margin:0;font-size:26px">We don't lose the deal over this. The customer owns the bespoke deliverables, for example a <i>MaintenanceWorkflow</i>. Elishah keeps the <i>WorkflowEngine</i>, <i>DocumentParser</i>, <i>ModelRouter</i> and <i>SAPConnector</i>. Sophisticated buyers are used to this arrangement.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 22 PARTNER PROTECTION -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">04</span>What protects the partners</div>
+  <h2>Why it's safe to bring us your best relationships.</h2>
+  <div class="body">
+    <div class="grid g2" style="gap:30px">
+      <div class="card"><span class="num c-amber" style="font-size:56px">01</span><h3 style="margin-top:6px">Deal registration</h3><p>Register an account and buying centre. The date-stamped registration settles who brought it in.</p></div>
+      <div class="card"><span class="num c-amber" style="font-size:56px">02</span><h3 style="margin-top:6px">Protected accounts: 6–12 months</h3><p>Nobody in the network goes around you to the same buying centre. Protection covers the opportunity you created, not "all of Aramco, forever".</p></div>
+      <div class="card"><span class="num c-amber" style="font-size:56px">03</span><h3 style="margin-top:6px">Signed deal schedule before the proposal</h3><p>Points, pools, tail and reserve are fixed in writing before any money is discussed with the customer.</p></div>
+      <div class="card"><span class="num c-amber" style="font-size:56px">04</span><h3 style="margin-top:6px">Open books, mutual non-circumvention</h3><p>Deductions come from a fixed schedule and partners can see every line. Non-circumvention binds all parties, Elishah included.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 23 AGREEMENTS -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">04</span>The paperwork</div>
+  <h2>Four documents. Not twenty.</h2>
+  <div class="body" style="flex-direction:row;gap:56px;align-items:center">
+    <div style="flex:1.1">
+      <table class="t" style="font-size:24px">
+        <tr><th style="width:42%">Document</th><th>Parties · covers</th></tr>
+        <tr><td><b>1 · Master Collaboration Agreement</b></td><td class="muted">Elishah + Dimuthu + each partner. Roles, confidentiality, non-circumvention, IP, deal registration, conflicts, anti-bribery, termination, disputes.</td></tr>
+        <tr><td><b>2 · Deal Schedule</b></td><td class="muted">One page per opportunity. Points, pools, tail, reserve. Everyone signs before the proposal goes out.</td></tr>
+        <tr><td><b>3 · Customer MSA + SOW</b></td><td class="muted">Elishah ↔ customer. BO / BOM, scope, SLA, fees, liability, security, data, acceptance.</td></tr>
+        <tr><td><b>4 · IP Licence</b></td><td class="muted">Usually part of the MSA. Elishah licenses the platform and never assigns it.</td></tr>
+      </table>
+    </div>
+    <div style="flex:.8">
+      <div class="schedule">
+        <div class="hd" style="margin-top:0">Deal Schedule · DS-2026-001</div>
+        <div class="row"><span>Customer</span><span>[Gulf Industrial Co]</span></div>
+        <div class="row"><span>Offering</span><span>BOM · Intelligence</span></div>
+        <div class="hd">Commercial · 25</div>
+        <div class="row"><span>Origination</span><span>[Partner] 10</span></div>
+        <div class="row"><span>Close</span><span>[Partner] 10</span></div>
+        <div class="row"><span>Stewardship</span><span>[Partner] 5</span></div>
+        <div class="hd">Product · 25</div>
+        <div class="row"><span>Dimuthu</span><span>25</span></div>
+        <div class="hd">Engineering · 50</div>
+        <div class="row"><span>Elishah</span><span>50</span></div>
+        <div class="hd">Terms</div>
+        <div class="row"><span>IP reserve</span><span>10% net revenue</span></div>
+        <div class="row"><span>Tail</span><span>36 months</span></div>
+        <div class="row"><span>Contracting party</span><span>Elishah</span></div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 24 COMPLIANCE -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">04</span>Compliance from day one</div>
+  <h2>Every dollar can be traced to documented commercial work.</h2>
+  <p class="lede">Gulf energy, state-linked buyers and success fees for intermediaries: regulators look hardest at exactly this combination. Good hygiene here protects the partner as much as it protects Elishah.</p>
+  <div class="body">
+    <div class="grid g3" style="gap:24px">
+      <div class="card"><h3>KYC &amp; identity</h3><p>Identity and beneficial-owner disclosure for every partner entity.</p></div>
+      <div class="card"><h3>Conflicts &amp; officials</h3><p>Disclosure of any conflicts and of relationships with public officials.</p></div>
+      <div class="card"><h3>Anti-bribery undertaking</h3><p>Signed in the MCA and renewed annually.</p></div>
+      <div class="card"><h3>Documented scope</h3><p>A written description of the services behind every point earned.</p></div>
+      <div class="card"><h3>Clean payments</h3><p>Paid only to the contracted entity and its account, against invoice, with no cash or third-party payments.</p></div>
+      <div class="card"><h3>Records</h3><p>Approval authority and audit trail kept in line with US DOJ, UK Bribery Act and Singapore CPIB guidance.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 25 RIGHT TO WIN -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">05</span>Right to win</div>
+  <h2>Each partner gets a co-branded kit, so Elishah is their delivery arm.</h2>
+  <div class="body" style="flex-direction:row;gap:64px;align-items:center">
+    <div style="flex:.9">
+      <p style="font-size:30px;line-height:1.4">A partner shouldn't be <span class="muted">"introducing my software developer."</span><br>They should be saying <b>"this is my technology delivery arm."</b></p>
+      <div class="rule"></div>
+      <h4>The kit</h4>
+      <ul class="clean" style="margin-top:10px">
+        <li>Co-branded tear sheet and microsite page for the partner's own website</li>
+        <li>Team profiles: engineering, product, industry</li>
+        <li>A 20-second pitch and a 5-slide intro deck</li>
+        <li>A demo environment in air-gapped and hybrid modes</li>
+      </ul>
+    </div>
+    <div class="tearsheet" style="flex:1.1">
+      <div class="ts-head"><div class="ts-brand">Elishah × [Partner]</div><h3>Private AI infrastructure for industry</h3></div>
+      <div class="ts-body">
+        <div>
+          <h4>The team</h4>
+          <div class="person"><b>Joel Tong · Engineering &amp; Infrastructure</b>Payments and infrastructure engineering, enterprise architecture, delivery organisation.</div>
+          <div class="person"><b>Dimuthu · Product &amp; Commercialisation</b>Product development, fast time-to-market, enterprise solutioning.</div>
+          <div class="person"><b>[Partner] · Industry &amp; Markets</b>Regional relationships, enterprise access, industry expertise.</div>
+        </div>
+        <div>
+          <h4>What we deliver</h4>
+          <ul class="clean" style="margin-bottom:18px"><li style="font-size:18px;margin:4px 0;padding-left:26px">Private knowledge AI</li><li style="font-size:18px;margin:4px 0;padding-left:26px">Enterprise AI gateway</li><li style="font-size:18px;margin:4px 0;padding-left:26px">On-prem AI infrastructure</li><li style="font-size:18px;margin:4px 0;padding-left:26px">AI workflow automation</li><li style="font-size:18px;margin:4px 0;padding-left:26px">Enterprise integrations</li></ul>
+          <h4>Deployment</h4>
+          <div class="chips"><span>Cloud</span><span>Private VPC</span><span>On-premise</span><span>Air-gapped</span><span>Hybrid frontier + local</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 26 FIELD GUIDE -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">05</span>Partner field guide</div>
+  <h2>You don't need to understand Kubernetes. Listen for pain.</h2>
+  <div class="body" style="flex-direction:row;gap:64px;align-items:stretch">
+    <div style="flex:1.2;display:flex;flex-direction:column;gap:22px">
+      <div class="card" style="padding:30px 36px"><p class="quote" style="font-size:38px">"Which process here takes 30 people and a pile of Excel?"</p></div>
+      <div class="card" style="padding:30px 36px"><p class="quote" style="font-size:38px">"Where do you lose millions because three systems don't reconcile?"</p></div>
+      <div class="card" style="padding:30px 36px"><p class="quote" style="font-size:38px">"Which new regulation or customer demand are you struggling to meet?"</p></div>
+    </div>
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center">
+      <h4>The 20-second pitch</h4>
+      <p style="font-size:29px;margin-top:14px;line-height:1.45">"We deploy a private ChatGPT-style system entirely inside your organisation, grounded in your own knowledge. You control, request by request, whether it uses your own models or frontier models like Claude and ChatGPT."</p>
+      <div class="rule"></div>
+      <h4>Then ask for</h4>
+      <p style="font-size:27px;margin-top:10px">The Head of Digital, the CFO, the head of Downstream / Mobility, or the head of Commercial Operations. We send two people to map the workflow and scope a paid Discovery.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 27 HORIZON -->
+<section class="slide dark">
+  <div class="eyebrow"><span class="n">06</span>The horizon</div>
+  <h2 style="color:#F2EEE6">Consulting is how we find opportunities. Owning software assets is the end goal.</h2>
+  <div class="body" style="flex-direction:row;gap:60px;align-items:center">
+    <div style="flex:1">
+      <p class="lede" style="margin-top:0">A small-scale Bending Spoons approach: <b style="color:#F3E3CC">acquire → modernise → add AI → distribute → hold.</b> We target founder-owned vertical software with €300k–5m revenue, 10–200 enterprise customers, old technology and no succession plan.</p>
+      <div class="rule" style="background:#2A3B4B"></div>
+      <div class="grid g3" style="gap:24px">
+        <div><h4 style="color:var(--amber)">Europe</h4><p style="color:#C9CFD4;font-size:24px;margin-top:8px">Where we find acquisitions: ageing vendors with 15 years of customers.</p></div>
+        <div><h4 style="color:#7FB5AE">Gulf</h4><p style="color:#C9CFD4;font-size:24px;margin-top:8px">Where they grow: new buyers for proven products.</p></div>
+        <div><h4 style="color:#8FA9D6">SG / Hanoi</h4><p style="color:#C9CFD4;font-size:24px;margin-top:8px">Where they're rebuilt: one shared platform under every product.</p></div>
+      </div>
+    </div>
+    <div style="flex:.8">
+      <h4 style="color:#7F8A94;margin-bottom:16px">First hunting list</h4>
+      <div class="chips" style="gap:10px">
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Bunker management</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Fuel-card management</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">B2B fuel billing</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Fuel-distributor ERP</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Terminal management</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Tank inventory</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Commodity reconciliation</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Permit-to-work</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Contractor management</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Document control</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Inspection management</span>
+        <span style="color:#D5D9DD;border-color:#2F4050;font-size:17px;padding:8px 14px">Invoice reconciliation</span>
+      </div>
+      <p style="color:#8E98A1;font-size:22px;margin-top:24px">The same economics apply: partners who find a target or a buyer earn from it. Acquisition terms go in their own schedule.</p>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 28 NEXT 90 DAYS -->
+<section class="slide">
+  <div class="eyebrow"><span class="n">07</span>Next 90 days</div>
+  <h2>From handshake to first paid Discovery.</h2>
+  <div class="body" style="flex-direction:row;gap:56px;align-items:stretch">
+    <div style="flex:1.3" class="grid">
+      <div class="card" style="padding:28px 34px;display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start"><span class="num c-amber" style="font-size:40px;white-space:nowrap">Day 0–14</span><p style="margin:0">Sign the MCA. Complete KYC. Tear sheet goes live on the partner's site. Register the first 5 target accounts.</p></div>
+      <div class="card" style="padding:28px 34px;display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start"><span class="num c-teal" style="font-size:40px;white-space:nowrap">Day 15–45</span><p style="margin:0">Demo environment running in air-gapped and hybrid modes. Three discovery conversations booked with Digital, CFO or Downstream leads.</p></div>
+      <div class="card" style="padding:28px 34px;display:grid;grid-template-columns:250px 1fr;gap:24px;align-items:start"><span class="num c-navy" style="font-size:40px;white-space:nowrap">Day 46–90</span><p style="margin:0">First paid Discovery signed. First deal schedule countersigned. Pilot SOW drafted.</p></div>
+    </div>
+    <div style="flex:1" class="card">
+      <h4 style="color:var(--amber)">Decisions for today</h4>
+      <ol style="margin-top:16px;padding-left:34px">
+        <li style="font-size:26px;margin:12px 0">10% platform reserve plus a 50 / 25 / 25 PCP split</li>
+        <li style="font-size:26px;margin:12px 0">Points schedule: 10 / 10 / 5 in each pool</li>
+        <li style="font-size:26px;margin:12px 0">Recurring step-down and a 36-month tail</li>
+        <li style="font-size:26px;margin:12px 0">Protected-account window: 6 or 12 months</li>
+        <li style="font-size:26px;margin:12px 0">The first 5 target accounts and who owns each</li>
+      </ol>
+    </div>
+  </div>
+  <div class="foot"><span>Elishah Partner Network</span><span>Confidential</span></div>
+</section>
+
+<!-- 29 CLOSE -->
+<section class="slide dark title-slide">
+  <div class="glow"></div>
+  <div class="mark"><i></i>Elishah · Partner Network</div>
+  <div>
+    <p class="quote" style="font-size:78px;max-width:1500px">Partners bring the domain and the doors.<br>Elishah builds and owns the IP.<br><span style="color:var(--amber)">Every deal makes the platform more valuable for all of us.</span></p>
+  </div>
+  <div class="title-meta">
+    <div>The model<b>10% reserve · 50 / 25 / 25</b></div>
+    <div>The offer<b>Build · Operate · Maintain</b></div>
+    <div>Contact<b>joel@elishah.biz</b></div>
+  </div>
+</section>
+
+</div></div>
+<div class="nav-hint">← → to navigate · F fullscreen</div>
+
+<script>
+(function(){
+  const deck = document.getElementById('deck');
+  const slides = Array.from(deck.querySelectorAll('.slide'));
+  const progress = document.getElementById('progress');
+  const total = slides.length;
+  // number footers
+  slides.forEach((s,i)=>{
+    const f = s.querySelector('.foot span:last-child');
+    if(f) f.textContent = f.textContent + ' · ' + String(i+1).padStart(2,'0') + ' / ' + total;
+  });
+  let idx = 0;
+  const fromHash = parseInt((location.hash||'').replace('#',''),10);
+  if(!isNaN(fromHash) && fromHash>=1 && fromHash<=total) idx = fromHash-1;
+  function fit(){
+    const s = Math.min(window.innerWidth/1920, window.innerHeight/1080);
+    deck.style.transform = 'scale(' + s + ')';
+  }
+  function show(i){
+    idx = Math.max(0, Math.min(total-1, i));
+    slides.forEach((s,j)=>s.classList.toggle('active', j===idx));
+    progress.style.width = ((idx+1)/total*100) + '%';
+    history.replaceState(null,'','#'+(idx+1));
+  }
+  document.addEventListener('keydown', e=>{
+    if(['ArrowRight','PageDown',' ','Enter'].includes(e.key)){e.preventDefault();show(idx+1)}
+    else if(['ArrowLeft','PageUp','Backspace'].includes(e.key)){e.preventDefault();show(idx-1)}
+    else if(e.key==='Home'){show(0)}
+    else if(e.key==='End'){show(total-1)}
+    else if(e.key==='f'||e.key==='F'){
+      if(!document.fullscreenElement) document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();
+      else document.exitFullscreen&&document.exitFullscreen();
+    }
+  });
+  document.addEventListener('click', e=>{
+    if(e.target.closest('a,button')) return;
+    if(e.clientX > window.innerWidth*0.35) show(idx+1); else show(idx-1);
+  });
+  let tx=null;
+  document.addEventListener('touchstart',e=>{tx=e.touches[0].clientX},{passive:true});
+  document.addEventListener('touchend',e=>{if(tx===null)return;const dx=e.changedTouches[0].clientX-tx;if(Math.abs(dx)>40)show(idx+(dx<0?1:-1));tx=null});
+  window.addEventListener('resize', fit);
+  fit(); show(idx);
+})();
+</script>
+</body>
+</html>
