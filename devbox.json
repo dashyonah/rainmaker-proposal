@@ -1,0 +1,21 @@
+{
+  "packages": [
+    "pre-commit@latest",
+    "nodejs@latest",
+    "git@latest",
+    "gh@latest",
+    "shfmt@latest",
+    "prettier@latest"
+  ],
+  "env": {
+    "DEVBOX_COREPACK_ENABLED": "true"
+  },
+  "shell": {
+    "init_hook": [
+      "make pre-commit-install",
+      "unset DEVELOPER_DIR",
+      "alias claude='claude --dangerously-skip-permissions --chrome --worktree'"
+    ],
+    "scripts": {}
+  }
+}
